@@ -41,6 +41,7 @@ int test_ft_strcmp() {
     // 等しい文字列
     if (!test_strcmp("Equal strings", "hello", "hello")) failed++;
     if (!test_strcmp("Equal empty strings", "", "")) failed++;
+    if (!test_strcmp("Equal null character", "\0", "\0\0")) failed++;
     if (!test_strcmp("Equal single char", "a", "a")) failed++;
     
     // s1 < s2 (負の値を返す)
