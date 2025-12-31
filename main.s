@@ -4,11 +4,15 @@ result_msg: db 'ft_strlen returned: '
 result_buf: times 20 db 0
 msg: db 'hello 2026', 10, 0
 newline: db 10
+read_buf: times 100 db 0
+test_file: db '/tmp/ft_read_test.txt', 0
+test_content: db 'This is a test file for ft_read!', 10, 0
 
 section .text
 global _start
 extern ft_strlen
 extern ft_write
+extern ft_read
 
 _start:
     ; ft_strlenを呼び出す
@@ -51,6 +55,55 @@ _start:
     mov rsi, str        ; buf: メッセージ
     mov rdx, r8         ; count: ft_strlenの戻り値を使用
     call ft_write       ; ft_writeを呼び出し
+
+    ; テストファイルを作成して書き込む
+    mov rax, 2          ; syscall: open
+    mov rdi, test_file  ; ファイル名
+    mov rsi, 577        ; O_CREAT | O_WRONLY | O_TRUNC (64+1+512)
+    mov rdx, 0644       ; パーミッション
+    syscall
+    mov r10, rax        ; ファイルディスクリプタをr10に保存
+
+    ; テストファイルにデータを書き込む
+    mov rdi, r10        ; fd
+    mov rsi, test_content ; buf
+    mov rdx, 35         ; count: テストコンテンツの長さ
+    call ft_write       ; ft_writeを呼び出し
+
+    ; ファイルを閉じる
+    mov rax, 3          ; syscall: close
+    mov rdi, r10
+    syscall
+
+    ; ファイルを開いて読み込む
+    mov rax, 2          ; syscall: open
+    mov rdi, test_file  ; ファイル名
+    mov rsi, 0          ; O_RDONLY
+    syscall
+    mov r10, rax        ; ファイルディスクリプタをr10に保存
+
+    ; ft_readでファイルから読み込む
+    mov rdi, r10        ; fd
+    mov rsi, read_buf   ; buf
+    mov rdx, 100        ; count: 最大100バイト
+    call ft_read        ; ft_readを呼び出し
+    mov r11, rax        ; 読み込んだバイト数をr11に保存
+
+    ; ファイルを閉じる
+    mov rax, 3          ; syscall: close
+    mov rdi, r10
+    syscall
+
+    ; 読み込んだデータを出力
+    mov rdi, 1          ; fd: stdout
+    mov rsi, read_buf   ; buf: 読み込んだデータ
+    mov rdx, r11        ; count: 読み込んだバイト数
+    call ft_write       ; ft_writeを呼び出し
+
+    ; テストファイルを削除
+    mov rax, 87         ; syscall: unlink
+    mov rdi, test_file
+    syscall
 
     mov rax, 60         ; syscall: exit
     xor rdi, rdi

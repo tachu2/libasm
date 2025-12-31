@@ -1,12 +1,25 @@
 #include <iostream>
 #include <cstdlib>
 
+extern "C" {
+    ssize_t ft_read(int fd, void *buf, size_t count);
+    ssize_t ft_write(int fd, const void *buf, size_t count);
+}
+
 // 各テスト関数の宣言
 int test_ft_strlen();
 int test_ft_write();
 int test_ft_read();
 
-int main() {
+void playground() {
+    char buf[1024];
+    ssize_t bytes = ft_read(0, buf, 1024);
+    std::cout << "read_result: " << bytes << std::endl;
+    buf[bytes] = '\0';
+    std::cout << "read_result: " << buf << std::endl;
+}
+
+int run_tests() {
     std::cout << "Running all tests..." << std::endl;
     std::cout << "====================" << std::endl;
     
@@ -24,4 +37,9 @@ int main() {
         std::cerr << total_failed << " test(s) failed!" << std::endl;
         return 1;
     }
+}
+
+int main() {
+    // playground();
+    return run_tests();
 }
