@@ -20,6 +20,12 @@ SRCS := $(wildcard $(addsuffix /*.$(SRC_EXT), $(VPATH)))
 OBJS := $(patsubst $(SRCS_DIR)/%.$(SRC_EXT),$(OBJS_DIR)/%.o,$(SRCS))
 INCLUDES := -I$(SRCS_DIR)
 
+CXX := g++
+CXXFLAGS := -Wall -Wextra -Werror -std=c++17
+TEST_EXEC := $(TEST_DIR)/test.out
+TEST_MAIN := $(TEST_DIR)/main.cpp
+TEST_SRCS := $(wildcard $(TEST_DIR)/test_*.cpp)
+
 all: $(OBJS_DIR) $(NAME) $(EXEC)
 
 $(NAME): $(OBJS)
@@ -40,17 +46,19 @@ $(OBJS_DIR):
 	mkdir -p $@
 
 clean:
-	$(RM) $(OBJS_DIR) $(BUILD_DIR)
+	$(RM) $(OBJS_DIR) $(BUILD_DIR) $(TEST_EXEC)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-TEST_FILTER ?= '*'
-test:
-	cmake -S . -B $(BUILD_DIR)
-	cmake --build $(BUILD_DIR)
-	$(BUILD_DIR)/gtest-googletest --gtest_filter=$(TEST_FILTER)
+
+test: $(NAME) $(TEST_EXEC)
+	@$(TEST_EXEC)
+
+$(TEST_EXEC): $(TEST_MAIN) $(TEST_SRCS) $(NAME)
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_MAIN) $(TEST_SRCS) -L. -lasm
 
 .PHONY: all clean fclean re test debug
