@@ -1,9 +1,12 @@
+#include <cstring>
 #include <iostream>
 #include <cstdlib>
 
 extern "C" {
     ssize_t ft_read(int fd, void *buf, size_t count);
     ssize_t ft_write(int fd, const void *buf, size_t count);
+    char* ft_strcpy(char* dest, const char* src);
+    int ft_strcmp(const char* s1, const char* s2);
 }
 
 // 各テスト関数の宣言
@@ -11,13 +14,20 @@ int test_ft_strlen();
 int test_ft_write();
 int test_ft_read();
 int test_ft_strcpy();
+int test_ft_strcmp();
 
 void playground() {
-    char buf[1024];
-    ssize_t bytes = ft_read(0, buf, 1024);
-    std::cout << "read_result: " << bytes << std::endl;
-    buf[bytes] = '\0';
-    std::cout << "read_result: " << buf << std::endl;
+    // char buf[1024];
+    // ssize_t bytes = ft_read(0, buf, 1024);
+    // std::cout << "read_result: " << bytes << std::endl;
+    // buf[bytes] = '\0';
+    // std::cout << "read_result: " << buf << std::endl;
+    // char buf[] = "test";
+    // strcpy(buf, "const char *__restrict src");
+    // std::cout << buf << "\n";
+    // ft_strcpy(buf, "const char *__restrict src");
+    // std::cout << buf << "\n";
+    std::cout << ft_strcmp("test", "test") << "\n";
 }
 
 int run_tests() {
@@ -30,6 +40,7 @@ int run_tests() {
     total_failed += test_ft_write();
     total_failed += test_ft_read();
     total_failed += test_ft_strcpy();
+    total_failed += test_ft_strcmp();
     
     std::cout << "====================" << std::endl;
     if (total_failed == 0) {
@@ -42,6 +53,6 @@ int run_tests() {
 }
 
 int main() {
-    // playground();
+    playground();
     return run_tests();
 }
