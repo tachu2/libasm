@@ -1,19 +1,19 @@
 global ft_strlen
 
-; @param esi: pointer to the string
-; @returns eax: length of the string
+; @param rdi: pointer to the string
+; @returns rax: length of the string
 ft_strlen:
-  mov ecx, 0
+  mov rcx, 0
   jmp .loop
 
 .loop:
-  mov al, [esi]
+  mov al, [rdi]
   cmp al, 0
   je .done
-  inc ecx
-  inc esi
+  inc rcx
+  inc rdi
   jmp .loop
 
 .done:
-  mov eax, ecx
+  mov rax, rcx
   ret
