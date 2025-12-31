@@ -32,7 +32,7 @@ $(NAME): $(OBJS)
 	$(AR) $@ $^
 
 $(EXEC): $(OBJS_DIR)/main.o $(NAME)
-	$(LD) -o $@ $^
+	$(LD) -o $@ $^ -lc --dynamic-linker /lib64/ld-linux-x86-64.so.2
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.$(SRC_EXT)
 	@mkdir -p $(dir $@)
