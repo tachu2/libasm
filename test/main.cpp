@@ -23,6 +23,7 @@ int test_ft_strdup();
 int test_ft_list_size();
 int test_ft_list_push_front();
 int test_ft_list_sort();
+int test_ft_list_remove_if();
 
 void playground() {
     // char buf[1024];
@@ -53,6 +54,7 @@ int run_tests() {
     total_failed += test_ft_list_size();
     total_failed += test_ft_list_push_front();
     total_failed += test_ft_list_sort();
+    total_failed += test_ft_list_remove_if();
     
     std::cout << "====================" << std::endl;
     if (total_failed == 0) {
