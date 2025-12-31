@@ -7,9 +7,9 @@ ft_strlen:
   jmp .loop
 
 .loop:
-  mov al, [rdi]
-  cmp al, 0
-  je .done
+  mov al, [rdi] ; al=raxの下位8bits
+  cmp al, 0 ; null文字比較
+  je .done ; trueなら.doneにjump
   inc rcx
   inc rdi
   jmp .loop
