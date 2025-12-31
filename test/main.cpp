@@ -8,6 +8,8 @@ extern "C" {
     char* ft_strcpy(char* dest, const char* src);
     int ft_strcmp(const char* s1, const char* s2);
     char* ft_strdup(const char* s);
+    int ft_list_size(void *begin_list);
+    void ft_list_push_front(void **begin_list, void *data);
 }
 
 // 各テスト関数の宣言
@@ -17,6 +19,8 @@ int test_ft_read();
 int test_ft_strcpy();
 int test_ft_strcmp();
 int test_ft_strdup();
+int test_ft_list_size();
+int test_ft_list_push_front();
 
 void playground() {
     // char buf[1024];
@@ -44,6 +48,8 @@ int run_tests() {
     total_failed += test_ft_strcpy();
     total_failed += test_ft_strcmp();
     total_failed += test_ft_strdup();
+    total_failed += test_ft_list_size();
+    total_failed += test_ft_list_push_front();
     
     std::cout << "====================" << std::endl;
     if (total_failed == 0) {
