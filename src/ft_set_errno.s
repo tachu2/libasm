@@ -1,4 +1,4 @@
-global ft_set_errno
+global ft_set_errno:function hidden
 extern __errno_location
 
 ; システムコールのエラー処理
