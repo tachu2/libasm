@@ -7,6 +7,7 @@ extern "C" {
     ssize_t ft_write(int fd, const void *buf, size_t count);
     char* ft_strcpy(char* dest, const char* src);
     int ft_strcmp(const char* s1, const char* s2);
+    char* ft_strdup(const char* s);
 }
 
 // 各テスト関数の宣言
@@ -15,6 +16,7 @@ int test_ft_write();
 int test_ft_read();
 int test_ft_strcpy();
 int test_ft_strcmp();
+int test_ft_strdup();
 
 void playground() {
     // char buf[1024];
@@ -41,6 +43,7 @@ int run_tests() {
     total_failed += test_ft_read();
     total_failed += test_ft_strcpy();
     total_failed += test_ft_strcmp();
+    total_failed += test_ft_strdup();
     
     std::cout << "====================" << std::endl;
     if (total_failed == 0) {

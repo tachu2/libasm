@@ -13,6 +13,7 @@ global _start
 extern ft_strlen
 extern ft_write
 extern ft_read
+extern ft_strdup
 
 _start:
     ; ft_strlenを呼び出す
@@ -104,6 +105,15 @@ _start:
     mov rax, 87         ; syscall: unlink
     mov rdi, test_file
     syscall
+
+    ; ft_strdupを呼び出す
+    mov rdi, str        ; 第1引数: 文字列のポインタ
+    call ft_strdup      ; ft_strdupを呼び出し
+    mov r12, rax        ; 複製された文字列のポインタをr12に保存
+    
+    ; 複製された文字列を出力
+    mov rdi, r12        ; 複製された文字列のポインタを設定
+    call print          ; print関数を呼び出し
 
     mov rax, 60         ; syscall: exit
     xor rdi, rdi
