@@ -10,6 +10,7 @@ extern "C" {
 int test_ft_strlen();
 int test_ft_write();
 int test_ft_read();
+int test_ft_strcpy();
 
 void playground() {
     char buf[1024];
@@ -28,6 +29,7 @@ int run_tests() {
     total_failed += test_ft_strlen();
     total_failed += test_ft_write();
     total_failed += test_ft_read();
+    total_failed += test_ft_strcpy();
     
     std::cout << "====================" << std::endl;
     if (total_failed == 0) {
