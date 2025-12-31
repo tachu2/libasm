@@ -3,6 +3,7 @@
 
 // 各テスト関数の宣言
 int test_ft_strlen();
+int test_ft_write();
 
 int main() {
     std::cout << "Running all tests..." << std::endl;
@@ -11,6 +12,7 @@ int main() {
     int total_failed = 0;
     
     total_failed += test_ft_strlen();
+    total_failed += test_ft_write();
     
     std::cout << "====================" << std::endl;
     if (total_failed == 0) {
