@@ -10,6 +10,7 @@ extern "C" {
     char* ft_strdup(const char* s);
     int ft_list_size(void *begin_list);
     void ft_list_push_front(void **begin_list, void *data);
+    void ft_list_sort(void **begin_list, int (*cmp)(void*, void*));
 }
 
 // 各テスト関数の宣言
@@ -21,6 +22,7 @@ int test_ft_strcmp();
 int test_ft_strdup();
 int test_ft_list_size();
 int test_ft_list_push_front();
+int test_ft_list_sort();
 
 void playground() {
     // char buf[1024];
@@ -50,6 +52,7 @@ int run_tests() {
     total_failed += test_ft_strdup();
     total_failed += test_ft_list_size();
     total_failed += test_ft_list_push_front();
+    total_failed += test_ft_list_sort();
     
     std::cout << "====================" << std::endl;
     if (total_failed == 0) {
