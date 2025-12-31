@@ -21,11 +21,13 @@ ft_list_sort:
   mov r8, [rdi]        ; r8 = *begin_list (現在のノード)
   test r8, r8          ; リストが空かチェック
   jz .done
+  jmp .outer_loop
   
   ; 外側ループ: リスト全体を走査
 .outer_loop:
   mov r8, [rdi]        ; r8 = *begin_list (リセット)
   mov r9, 0            ; r9 = swapped flag (0 = false)
+  jmp .inner_loop
   
   ; 内側ループ: 隣接する要素を比較
 .inner_loop:
@@ -66,6 +68,7 @@ ft_list_sort:
   mov [r8], r12        ; current->data = next->data
   mov [r10], r11       ; next->data = current->data
   mov r9, 1            ; swapped = true
+  jmp .next_pair
   
 .next_pair:
   mov r8, [r8 + 8]     ; current = current->next

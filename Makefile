@@ -67,8 +67,7 @@ fclean: clean
 
 re: fclean all
 
-
-test: $(NAME) $(TEST_EXEC)
+test: bonus $(TEST_EXEC)
 	@$(TEST_EXEC)
 
 $(TEST_EXEC): $(TEST_MAIN) $(TEST_SRCS) $(NAME)
