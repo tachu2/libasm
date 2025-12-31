@@ -9,9 +9,9 @@ ft_read:
   mov rax, 0          ; syscall: read (0)
   syscall             ; read(fd, buf, count)
   cmp rax, 0
-  jl .fail            ; rax < 0 ならエラー処理へ
+  jl .err             ; rax < 0 ならエラー処理へ
   ret
 
-.fail:
+.err:
   call ft_set_errno   ; errnoを設定して-1を返す
   ret

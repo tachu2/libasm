@@ -11,9 +11,9 @@ ft_write:
   
   ; エラーチェック: システムコールが負の値を返した場合
   cmp rax, 0
-  jl .fail            ; rax < 0 ならエラー処理へ
+  jl .err             ; rax < 0 ならエラー処理へ
   ret
   
-.fail:
+.err:
   call ft_set_errno   ; errnoを設定して-1を返す
   ret
