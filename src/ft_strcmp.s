@@ -12,8 +12,8 @@ ft_strcmp:
   mov bl, [rsi] 
   cmp al, bl          ; 比較（フラグ更新、値は維持）
   jne .done           ; 差があればジャンプ
-  test al, al         ; 終端チェック（値が残っているので可能）
-  jz .done            ; 終端ならジャンプ
+  test al, al         ; al が 0 かチェック、cmp al, 0 と同等
+  jz .done            ; 終端（null文字）ならジャンプ
   inc rdi
   inc rsi
   jmp .loop
