@@ -26,7 +26,7 @@ TEST_EXEC := $(TEST_DIR)/test.out
 TEST_MAIN := $(TEST_DIR)/main.cpp
 TEST_SRCS := $(wildcard $(TEST_DIR)/test_*.cpp)
 
-all: $(OBJS_DIR) $(NAME) $(EXEC)
+all: $(OBJS_DIR) $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $@ $^
@@ -49,7 +49,7 @@ clean:
 	$(RM) $(OBJS_DIR) $(BUILD_DIR) $(TEST_EXEC)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(EXEC)
 
 re: fclean all
 
