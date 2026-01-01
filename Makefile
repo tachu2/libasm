@@ -33,7 +33,7 @@ TEST_EXEC := $(TEST_DIR)/test.out
 TEST_MAIN := $(TEST_DIR)/main.cpp
 TEST_SRCS := $(wildcard $(TEST_DIR)/test_*.cpp)
 
-all: $(OBJS_DIR) $(NAME)
+all: $(OBJS_DIR) $(NAME) $(EXEC)
 
 bonus:
 	@$(MAKE) WITH_BONUS=1 $(NAME)
