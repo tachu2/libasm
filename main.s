@@ -23,8 +23,7 @@ _start:
     ; _start開始時、rspは16の倍数になっているはず（ABIによる）
     
     mov rdi, msg_hello
-    xor eax, eax
-    call printf
+    call print
 
     ; --- 計算処理の呼び出し ---
     call calc_loop
@@ -110,4 +109,13 @@ echo_loop:
 
 .done:
     leave
+    ret
+
+print:
+    push rdi             ; 文字列ポインタを保存（ft_strlenがrdiを変更するため）
+    call ft_strlen
+    mov rdx, rax         ; 文字列の長さをrdxに設定
+    pop rsi              ; 保存していた文字列ポインタをrsiに復元（ft_writeのbuf引数）
+    mov rdi, 1           ; stdout
+    call ft_write
     ret
