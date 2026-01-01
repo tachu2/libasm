@@ -4,6 +4,7 @@ section .data
     fmt_in:    db '%d %d', 0
     fmt_out:   db 'The sum is: %d', 10, 0
     msg_echo:  db 10, '--- Echo Mode (Ctrl+D to exit) ---', 10, 0
+    msg_aa:    db 10, '   /\_/\  ', 10, '  ( o.o ) ', 10, '   > ^ <  ', 10, '  Bye Bye!', 10, 0
 
 section .text
     global _start
@@ -35,6 +36,11 @@ _start:
     
     call echo_loop
 
+    ; --- AA出力 (猫) ---
+    mov rdi, msg_aa
+    xor eax, eax
+    call printf
+
     ; --- 終了 ---
     mov rax, 60         ; syscall: exit
     xor rdi, rdi
@@ -60,9 +66,9 @@ calc_loop:
 
     ; scanf(fmt_in, &num1, &num2)
     mov rdi, fmt_in
-    lea rsi, [rbp - 4]
-    lea rdx, [rbp - 8]
-    xor eax, eax
+    lea rsi, [rbp - 4]    ; rsi = &num1 (第2引数: 1つ目の数値のアドレス)
+    lea rdx, [rbp - 8]    ; rdx = &num2 (第3引数: 2つ目の数値のアドレス)
+    xor eax, eax          ; 可変引数関数用: 浮動小数点引数の数 = 0
     call scanf
 
     ; 計算
