@@ -22,7 +22,7 @@ ft_list_push_front:
   push rdi             ; begin_list を保存
   push rsi             ; data を保存
   mov rdi, 16          ; malloc の引数: 16バイト
-  call malloc          ; rax に新しいノードのポインタが返る
+  call malloc WRT ..plt ; rax に新しいノードのポインタが返る
   pop rsi              ; data を復元
   pop rdi              ; begin_list を復元
   

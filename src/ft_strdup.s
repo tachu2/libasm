@@ -12,7 +12,7 @@ ft_strdup:
 
   inc rax             ; null文字用に1を足す
   mov rdi, rax        ; malloc の引数に設定
-  call malloc         ; rax に新しいメモリ領域のポインタが返る
+  call malloc WRT ..plt ; rax に新しいメモリ領域のポインタが返る
 
   pop rsi
   test rax, rax       ; malloc が NULL を返したかチェック
